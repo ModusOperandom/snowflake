@@ -11,7 +11,7 @@ in {
     snowflake = {
       dir = mkOpt path
         (lib.findFirst builtins.pathExists (builtins.toString ../.) [
-          "${config.user.home}/Workspace/public/snowflake"
+          "${config.user.home}/snowflake"
           "/etc/snowflake"
         ]);
       hostDir = mkOpt path

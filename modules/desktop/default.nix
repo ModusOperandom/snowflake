@@ -87,16 +87,7 @@ in {
     })
 
     (mkIf (cfg.type == "wayland") {
-      xdg.portal.wlr.enable = true;
-
-      programs.regreet = {
-        enable = true;
-        settings.env.SESSION_DIRS = builtins.concatStringsSep ":" [
-          "${config.services.displayManager.sessionData.desktops}/share/xsessions"
-          "${config.services.displayManager.sessionData.desktops}/share/wayland-sessions"
-        ];
-      };
-      services.greetd.settings.initial_session.user = "greeter";
+      services.greetd.settings.initial_session.user = config.user.name;
     })
 
     (mkIf (cfg.type == "x11") {

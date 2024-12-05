@@ -35,7 +35,7 @@ in {
       brightness.enable = true;
       screenshot.enable = true;
     };
-    modules.hardware.kmonad.enable = true;
+#    modules.hardware.kmonad.enable = true;
 
     nixpkgs.overlays = [ inputs.xmonad.overlay inputs.xmonad-contrib.overlay ];
 

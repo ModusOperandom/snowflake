@@ -17,7 +17,10 @@ in {
     };
 
     services.xserver.desktopManager.gnome.enable = true;
+    services.xserver.displayManager.gdm.wayland = true;
+    services.xserver.displayManager.gdm.enable = true;
     services.greetd.settings.initial_session.command = "gnome-session";
+    programs.dconf.enable = true;
 
     services.gnome = {
       gnome-keyring.enable = true;
@@ -25,29 +28,20 @@ in {
       sushi.enable = true;
     };
 
-    programs.dconf.enable = true;
-    services.udev = {
-      packages = [ pkgs.gnome.gnome-settings-daemon ];
-      extraRules = ''
-        ACTION=="add|change", KERNEL=="nvme[0-9]*", ATTR{queue/scheduler}="none"
-        ACTION=="add|change", KERNEL=="sd[a-z]|mmcblk[0-9]*", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="mq-deadline"
-        ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
-      '';
-    };
-
     user.packages = attrValues {
-      inherit (pkgs) dconf2nix;
-      inherit (pkgs.gnome) polari gnome-disk-utility gnome-tweaks;
+      inherit (pkgs) dconf2nix gnome-disk-utility gnome-tweaks polari;
       inherit (pkgs.gnomeExtensions)
-        appindicator aylurs-widgets blur-my-shell dash-to-dock gsconnect
-        just-perfection openweather # pop-shell
-        removable-drive-menu rounded-window-corners space-bar user-themes;
+        appindicator blur-my-shell dash-to-dock gsconnect
+        just-perfection #rounded-window-corners openweather pop-shell aylurs-widgets
+        removable-drive-menu space-bar user-themes;
     };
 
     environment.sessionVariables = {
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
       NIXOS_OZONE_WL = "1";
       MOZ_ENABLE_WAYLAND = "1";
+
+
     };
 
     # Enable chrome-gnome-shell in FireFox nightly (mozilla-overlay):

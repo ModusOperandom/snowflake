@@ -46,7 +46,7 @@ in {
   };
 
   system = {
-    stateVersion = "23.11";
+    stateVersion = "24.05";
     configurationRevision = with inputs; mkIf (self ? rev) self.rev;
   };
 
@@ -75,7 +75,7 @@ in {
     useXkbConfig = mkDefault true;
   };
 
-  time.timeZone = mkDefault "Europe/Stockholm";
+  time.timeZone = mkDefault "Australia/Adelaide";
 
   i18n.defaultLocale = mkDefault "en_US.UTF-8";
 

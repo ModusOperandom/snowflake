@@ -209,14 +209,14 @@ in {
       create.dataFile =
         mkIf (cfg.wallpaper != null) { "wallpaper".source = cfg.wallpaper; };
 
-      hm.programs.vscode.extensions =
-        let inherit (cfg.vscode.extension) name publisher version hash;
-        in pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
-          name = "${name}";
-          publisher = "${publisher}";
-          version = "${version}";
-          hash = "${hash}";
-        }];
+      #hm.programs.vscode.extensions =
+        #let inherit (cfg.vscode.extension) name publisher version hash;
+        #in pkgs.vscode-utils.extensionsFromVscodeMarketplace [{
+          #name = "${name}";
+          #publisher = "${publisher}";
+          #version = "${version}";
+          #hash = "${hash}";
+        #}];
     }
 
     (mkIf (desktop.type == "wayland") (mkMerge [

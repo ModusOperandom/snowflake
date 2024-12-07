@@ -13,7 +13,7 @@ in {
         inherit (pkgs)
           nixfmt nil # Nix Expression Language
           manix nix-index nix-init nix-output-monitor nix-tree nix-update
-          nixpkgs-review;
+          nixpkgs-review nixpkgs-fmt;
       };
 
       hm.programs.vscode.extensions =

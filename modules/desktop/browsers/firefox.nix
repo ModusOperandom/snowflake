@@ -26,15 +26,15 @@ in {
   };
 
   config = mkIf cfg.enable {
-    user.packages = let inherit (pkgs) makeDesktopItem firefox-beta-bin;
+    user.packages = let inherit (pkgs) makeDesktopItem firefox-bin;
     in [
-      firefox-beta-bin
+      firefox-bin
       (makeDesktopItem {
-        name = "firefox-beta-private";
-        desktopName = "Firefox Beta (Private)";
-        genericName = "Launch a private Firefox Beta instance";
-        icon = "firefox-beta";
-        exec = "${lib.getExe firefox-beta-bin} --private-window";
+        name = "firefox-private";
+        desktopName = "Firefox (Private)";
+        genericName = "Launch a private Firefox";
+        icon = "firefox";
+        exec = "${lib.getExe firefox-bin} --private-window";
         categories = [ "Network" "WebBrowser" ];
       })
     ];

@@ -3,7 +3,8 @@
 let
   myTerm = config.modules.desktop.terminal.default;
   inherit (config.modules.themes) editor font;
-in {
+in
+{
   # Introduction
   "__comment" =
     "(VSCode) settings.json => immutable conf-file, managed via (Nix) Home-Manager";
@@ -17,6 +18,9 @@ in {
     "**/*.exe" = true;
     "**/*.o" = true;
   };
+
+  # AI Slop
+
 
   # Colorscheme
   "workbench.colorTheme" = "${editor.vscode.dark}";

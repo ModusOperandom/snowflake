@@ -14,8 +14,16 @@
     services.ssh.enable = true;
 
     themes.active = "catppuccin";
+    develop = {
+      nix = {
+        enable = true;
+      };
+    };
     desktop = {
       gnome.enable = true;
+      extensions = {
+        rofi.enable = true;
+      };
       terminal = {
         default = "alacritty";
         alacritty.enable = true;

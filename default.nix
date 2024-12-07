@@ -77,7 +77,7 @@ in {
 
   time.timeZone = mkDefault "Australia/Adelaide";
 
-  i18n.defaultLocale = mkDefault "en_US.UTF-8";
+  i18n.defaultLocale = mkDefault "en_AU.UTF-8";
 
   environment = {
     defaultPackages = lib.mkForce [ ];

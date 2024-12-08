@@ -34,7 +34,7 @@
   --uc-autohide-sidebar-delay-after: 300ms;
   --uc-autohide-transition-duration: 300ms;
   --uc-autohide-transition-type: ease-in-out;
-  position: relative;
+  position: absolute;
   min-width: var(--uc-sidebar-width) !important;
   width: var(--uc-sidebar-width) !important;
   max-width: var(--uc-sidebar-width) !important;

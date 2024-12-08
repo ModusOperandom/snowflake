@@ -7,37 +7,41 @@ let
   inherit (lib.strings) concatStrings;
 
   cfg = config.modules.desktop.browsers.firefox;
-in {
-  options.modules.desktop.browsers.firefox = let
-    inherit (lib.options) mkEnableOption;
-    inherit (lib.types) attrsOf oneOf bool int lines str;
-    inherit (lib.my) mkOpt mkOpt';
-  in {
-    enable = mkEnableOption "Gecko-based libre browser";
-    profileName = mkOpt str config.user.name;
-    settings = mkOpt' (attrsOf (oneOf [ bool int str ])) { } ''
-      Firefox preferences set in <filename>user.js</filename>
-    '';
-    extraConfig = mkOpt' lines "" ''
-      Extra lines to add to <filename>user.js</filename>
-    '';
-    userChrome = mkOpt' lines "" "CSS Styles for Firefox's interface";
-    userContent = mkOpt' lines "" "Global CSS Styles for websites";
-  };
+in
+{
+  options.modules.desktop.browsers.firefox =
+    let
+      inherit (lib.options) mkEnableOption;
+      inherit (lib.types) attrsOf oneOf bool int lines str;
+      inherit (lib.my) mkOpt mkOpt';
+    in
+    {
+      enable = mkEnableOption "Gecko-based libre browser";
+      profileName = mkOpt str config.user.name;
+      settings = mkOpt' (attrsOf (oneOf [ bool int str ])) { } ''
+        Firefox preferences set in <filename>user.js</filename>
+      '';
+      extraConfig = mkOpt' lines "" ''
+        Extra lines to add to <filename>user.js</filename>
+      '';
+      userChrome = mkOpt' lines "" "CSS Styles for Firefox's interface";
+      userContent = mkOpt' lines "" "Global CSS Styles for websites";
+    };
 
   config = mkIf cfg.enable {
-    user.packages = let inherit (pkgs) makeDesktopItem firefox-bin;
-    in [
-      firefox-bin
-      (makeDesktopItem {
-        name = "firefox-private";
-        desktopName = "Firefox (Private)";
-        genericName = "Launch a private Firefox";
-        icon = "firefox";
-        exec = "${lib.getExe firefox-bin} --private-window";
-        categories = [ "Network" "WebBrowser" ];
-      })
-    ];
+    user.packages =
+      let inherit (pkgs) makeDesktopItem firefox-bin;
+      in [
+        firefox-bin
+        (makeDesktopItem {
+          name = "firefox-private";
+          desktopName = "Firefox (Private)";
+          genericName = "Launch a private Firefox";
+          icon = "firefox";
+          exec = "${lib.getExe firefox-bin} --private-window";
+          categories = [ "Network" "WebBrowser" ];
+        })
+      ];
 
     modules.desktop.browsers.firefox.settings = {
       # TAB cycle URL's, not buttons..
@@ -59,7 +63,7 @@ in {
       # WARNING: May not work across OS'es
       "services.sync.prefs.sync.browser.uiCustomization.state" = true;
       # Enables userContent.css and userChrome.css for our theme modules
-      "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+      "toolkit.legacyUserProfileCustomizations.stylesheets" = false;
       # Stop creating ~/Downloads!
       "browser.download.dir" = "${config.user.home}/downloads";
       # Disables built-in password manager -> use external PM!
@@ -173,43 +177,44 @@ in {
     };
 
     # Use a stable profile name so we can target it in themes
-    home.file = let cfgPath = ".mozilla/firefox";
-    in {
-      firefox-profiles = {
-        target = "${cfgPath}/profiles.ini";
-        text = ''
-          [Profile0]
-          Name=default
-          IsRelative=1
-          Path=${cfg.profileName}.default
-          Default=1
+    home.file =
+      let cfgPath = ".mozilla/firefox";
+      in {
+        firefox-profiles = {
+          target = "${cfgPath}/profiles.ini";
+          text = ''
+            [Profile0]
+            Name=default
+            IsRelative=1
+            Path=${cfg.profileName}.default
+            Default=1
 
-          [General]
-          StartWithLastProfile=1
-          Version=2
-        '';
-      };
+            [General]
+            StartWithLastProfile=1
+            Version=2
+          '';
+        };
 
-      user-js = mkIf (cfg.settings != { } || cfg.extraConfig != "") {
-        target = "${cfgPath}/${cfg.profileName}.default/user.js";
-        text = ''
-          ${concatStrings (mapAttrsToList (name: value: ''
-            user_pref("${name}", ${toJSON value});
-          '') cfg.settings)}
-          ${cfg.extraConfig}
-        '';
-      };
+        user-js = mkIf (cfg.settings != { } || cfg.extraConfig != "") {
+          target = "${cfgPath}/${cfg.profileName}.default/user.js";
+          text = ''
+            ${concatStrings (mapAttrsToList (name: value: ''
+              user_pref("${name}", ${toJSON value});
+            '') cfg.settings)}
+            ${cfg.extraConfig}
+          '';
+        };
 
-      user-chome = mkIf (cfg.userChrome != "") {
-        target = "${cfgPath}/${cfg.profileName}.default/chrome/userChrome.css";
-        text = cfg.userChrome;
-      };
+        user-chome = mkIf (cfg.userChrome != "") {
+          target = "${cfgPath}/${cfg.profileName}.default/chrome/userChrome.css";
+          text = cfg.userChrome;
+        };
 
-      user-content = mkIf (cfg.userContent != "") {
-        target = "${cfgPath}/${cfg.profileName}.default/chrome/userContent.css";
-        text = cfg.userContent;
+        user-content = mkIf (cfg.userContent != "") {
+          target = "${cfgPath}/${cfg.profileName}.default/chrome/userContent.css";
+          text = cfg.userContent;
+        };
       };
-    };
 
   };
 }

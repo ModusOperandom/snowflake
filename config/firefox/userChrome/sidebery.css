@@ -34,11 +34,11 @@
   --uc-autohide-sidebar-delay-after: 300ms;
   --uc-autohide-transition-duration: 300ms;
   --uc-autohide-transition-type: ease-in-out;
-  position: absolute;
+  position: relative;
   min-width: var(--uc-sidebar-width) !important;
   width: var(--uc-sidebar-width) !important;
   max-width: var(--uc-sidebar-width) !important;
-  z-index:1;
+  z-index: 99999;
 }
 
 #main-window[sizemode="fullscreen"] #sidebar-box{ --uc-sidebar-width: 1px; }

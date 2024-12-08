@@ -63,7 +63,7 @@ in
       # WARNING: May not work across OS'es
       "services.sync.prefs.sync.browser.uiCustomization.state" = true;
       # Enables userContent.css and userChrome.css for our theme modules
-      "toolkit.legacyUserProfileCustomizations.stylesheets" = false;
+      "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       # Stop creating ~/Downloads!
       "browser.download.dir" = "${config.user.home}/downloads";
       # Disables built-in password manager -> use external PM!

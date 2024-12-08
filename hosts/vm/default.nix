@@ -39,6 +39,9 @@
           enable = true;
           #privacy.enable = true;
         };
+        chromium = {
+          enable = true;
+        };
       };
       toolset = {
         player = {

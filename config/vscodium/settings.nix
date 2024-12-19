@@ -19,9 +19,6 @@ in
     "**/*.o" = true;
   };
 
-  # AI Slop
-
-
   # Colorscheme
   "workbench.colorTheme" = "${editor.vscode.dark}";
   "workbench.preferredDarkColorTheme" = "${editor.vscode.dark}";
@@ -34,7 +31,36 @@ in
 
   "debug.console.fontFamily" = "${font.mono.family}";
   "debug.console.fontWeight" = "${toString font.mono.weightNum}";
-  "debug.console.fontSize" = 16;
+  # Vim
+  "vim.easymotion" = true;
+  "vim.incsearch" = true;
+  "vim.useSystemClipboard" = true;
+  "vim.useCtrlKeys" = true;
+  "vim.hlsearch" = true;
+  "vim.insertModeKeyBindings" = [{
+    "before" = [ "j" "j" ];
+    "after" = [ "<Esc>" ];
+  }];
+  "vim.normalModeKeyBindingsNonRecursive" = [
+    {
+      "before" = [ "<leader>" "d" ];
+      "after" = [ "d" "d" ];
+    }
+    {
+      "before" = [ "<C-n>" ];
+      "commands" = [ " =nohl" ];
+    }
+    {
+      "before" = [ "K" ];
+      "commands" = [ "lineBreakInsert" ];
+      "silent" = true;
+    }
+  ];
+  "vim.leader" = "<space>";
+  "vim.handleKeys" = {
+    "<C-a>" = false;
+    "<C-f>" = false;
+  };
 
   "terminal.integrated.fontFamily" = "${font.mono.family}";
   "terminal.integrated.fontWeight" = "${toString font.mono.weightNum}";
@@ -83,7 +109,6 @@ in
   "markdown.extension.print.theme" = "dark";
 
   # Language specific
-  "haskell.formattingProvider" = "stylish-haskell";
 
   "[nix]" = { "editor.tabSize" = 2; };
 
@@ -96,36 +121,6 @@ in
   "gitlens.statusBar.alignment" = "left";
   "gitlens.views.repositories.location" = "scm";
 
-  # Vim
-  "vim.easymotion" = true;
-  "vim.incsearch" = true;
-  "vim.useSystemClipboard" = true;
-  "vim.useCtrlKeys" = true;
-  "vim.hlsearch" = true;
-  "vim.insertModeKeyBindings" = [{
-    "before" = [ "j" "j" ];
-    "after" = [ "<Esc>" ];
-  }];
-  "vim.normalModeKeyBindingsNonRecursive" = [
-    {
-      "before" = [ "<leader>" "d" ];
-      "after" = [ "d" "d" ];
-    }
-    {
-      "before" = [ "<C-n>" ];
-      "commands" = [ " =nohl" ];
-    }
-    {
-      "before" = [ "K" ];
-      "commands" = [ "lineBreakInsert" ];
-      "silent" = true;
-    }
-  ];
-  "vim.leader" = "<space>";
-  "vim.handleKeys" = {
-    "<C-a>" = false;
-    "<C-f>" = false;
-  };
   #VSCode icons
   "vsicons.dontShowNewVersionMessage": true;
   }

@@ -122,5 +122,5 @@ in
   "gitlens.views.repositories.location" = "scm";
 
   #VSCode icons
-  "vsicons.dontShowNewVersionMessage": true;
-  }
+  "vsicons.dontShowNewVersionMessage" = true;
+}

@@ -37,7 +37,6 @@
         default = "firefox";
         firefox = {
           enable = true;
-          #privacy.enable = true;
         };
         chromium = {
           enable = true;
@@ -50,7 +49,6 @@
         };
         communication = {
           base.enable = true;
-          matrix.withDaemon.enable = false;
         };
         readers = {
           enable = true;
@@ -59,7 +57,7 @@
       };
       distractions = {
         steam.enable = true;
-        lutris.enable = true;
+        lutris.enable = false;
       };
     };
   };

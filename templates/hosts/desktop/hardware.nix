@@ -38,7 +38,7 @@
   powerManagement.cpuFreqGovernor = "performance";
 
   # :WARN| DISABLE NON-EXISTANT cpu
-  hardware.cpu.amd.updateMicrocode = true;
+  #hardware.cpu.amd.updateMicrocode = true;
   hardware.cpu.intel.updateMicrocode = true;
 
   # Here we enable our custom modules (snowflake/modules)

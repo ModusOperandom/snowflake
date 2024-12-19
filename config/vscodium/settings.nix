@@ -126,4 +126,6 @@ in
     "<C-a>" = false;
     "<C-f>" = false;
   };
-}
+  #VSCode icons
+  "vsicons.dontShowNewVersionMessage": true;
+  }

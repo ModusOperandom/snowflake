@@ -83,8 +83,6 @@ in
   "markdown.extension.print.theme" = "dark";
 
   # Language specific
-  "haskell.formattingProvider" = "stylish-haskell";
-
   "[nix]" = { "editor.tabSize" = 2; };
 
   # Git

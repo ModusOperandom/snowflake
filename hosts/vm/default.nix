@@ -19,6 +19,9 @@
         enable = true;
       };
     };
+    virtualize = {
+      enable = true;
+    };
     desktop = {
       gnome.enable = true;
       extensions = {

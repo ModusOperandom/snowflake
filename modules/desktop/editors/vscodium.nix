@@ -23,7 +23,6 @@ in
         eamodio.gitlens
         editorconfig.editorconfig
         mhutchie.git-graph
-        vscodevim.vim
 
         # Aesthetics
         esbenp.prettier-vscode

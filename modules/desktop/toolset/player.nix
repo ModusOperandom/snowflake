@@ -5,7 +5,8 @@ let
   inherit (lib.modules) mkIf mkMerge;
 
   cfg = config.modules.desktop.toolset.player;
-in {
+in
+{
   options.modules.desktop.toolset.player =
     let inherit (lib.options) mkEnableOption;
     in {
@@ -14,9 +15,10 @@ in {
     };
 
   config = mkMerge [
-    (mkIf cfg.music.enable { user.packages = [ pkgs.youtube-music ]; })
+    (mkIf cfg.music.enable { user.packages = [ pkgs.cider ]; })
 
     (mkIf cfg.video.enable {
+      user.packages = [ pkgs.vlc ];
       hm.programs.mpv = {
         enable = true;
         scripts = attrValues {
